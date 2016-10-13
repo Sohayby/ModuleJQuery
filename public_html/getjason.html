@@ -12,13 +12,33 @@ and open the template in the editor.
         <script src="JS/jquery-3.1.1.js" type="text/javascript"></script>
         <script type="text/javascript">
           
-          function chargJson(){
+          function chargeJson(){
+          $.getJSON("JSON/films.json", function(data){
           
+          var tabFilms = data.films;
+//          alert("Nbre films:" + tabFilms.length);
+//              alert(filmAct.id + "" +filmAct.titre);
+            
+            var txtToAppend="";
+            for( i=0; i<tabFilms.length; i++){
+               var  filmAct = tabFilms[i]; 
+            
+         txtToAppend += "<tr>";
+           txtToAppend += "<td>"+ filmAct.id + "</td>";
+            txtToAppend += "<td>"+ filmAct.titre + "</td>";
+           txtToAppend += "<td>"+ filmAct.synopsis + "</td>";
+             txtToAppend += "<tr>";
+          }
+          $('#liseFilms').append(txtToAppend);
+    });
           };
           </script>
     </head>
-    <body>
-        <input type="button" value=" charger JSON" onclick="chargeJson()"  />
-        <div id="contenu">Liste des films </div>
+    <body> 
+        <input type="button" value=" charger JSON" onclick="chargeJson();"  />
+        <div id="contenu">
+            <table id ="listeFilms">  </table>  
+            </div>
+       
     </body>
 </html>
